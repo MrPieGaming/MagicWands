@@ -4,5 +4,5 @@ main: me.pieface3450.magicwands.main
 prefix: Magic Wands
 load: POSTWORLD
 author: MrPieGaming
-description: Magic Wands plugin
+description: A plugin that adds Magical items to the game.
 api-version: 1.13
