@@ -1,0 +1,8 @@
+name: MagicWands
+version: ${project.version}
+main: me.pieface3450.magicwands.main
+prefix: Magic Wands
+load: POSTWORLD
+author: MrPieGaming
+description: Magic Wands plugin
+api-version: 1.13
