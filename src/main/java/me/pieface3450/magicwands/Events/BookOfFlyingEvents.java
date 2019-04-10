@@ -92,13 +92,12 @@ public class BookOfFlyingEvents implements Listener {
                 }
 
                 final BukkitScheduler scheduler = main.getPlugin(main.class).getServer().getScheduler();
-                scheduler.scheduleSyncRepeatingTask(main.getPlugin(main.class), new BukkitRunnable() {
+                scheduler.scheduleSyncRepeatingTask(main.getPlugin(main.class), new Runnable() {
                     public void run() {
                         if (getTotalExperience(event.getPlayer()) <= 0) {
                             player.setAllowFlight(false);
                             player.sendMessage(ChatColor.RED + "Flight has been disabled. Out of experience.");
                             // cancel scheduler here
-                            scheduler.cancelTask(this.getTaskId()); // doesn't cancel out
                         } else {
                             //player.setExp(player.getTotalExperience() - 15f);
                             setTotalExperience(getTotalExperience(event.getPlayer()) - 2, event.getPlayer());
