@@ -1,10 +1,7 @@
 package me.pieface3450.magicwands;
 
 import me.pieface3450.magicwands.Events.*;
-import me.pieface3450.magicwands.Recipes.BookOfFlyingRecipe;
-import me.pieface3450.magicwands.Recipes.FireballWandRecipe;
-import me.pieface3450.magicwands.Recipes.LightningWandRecipe;
-import me.pieface3450.magicwands.Recipes.TeleportWandRecipe;
+import me.pieface3450.magicwands.Recipes.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,10 +23,10 @@ public class main extends JavaPlugin {
     }
 
     private void registerRecipes() {
-        Bukkit.getServer().addRecipe(TeleportWandRecipe.tpWandRecipe());
-        Bukkit.getServer().addRecipe(LightningWandRecipe.lightningWandRecipe());
+        Bukkit.getServer().addRecipe(WandRecipes.tpWandRecipe());
+        Bukkit.getServer().addRecipe(WandRecipes.lightningWandRecipe());
+        Bukkit.getServer().addRecipe(WandRecipes.fireballWandRecipe());
         Bukkit.getServer().addRecipe(BookOfFlyingRecipe.bofRecipe());
-        Bukkit.getServer().addRecipe(FireballWandRecipe.fireballWandRecipe());
     }
 
     // C:\Users\piefa\Desktop\MC Servers\Spigot Servers\Spigot 1.13.2\plugins
