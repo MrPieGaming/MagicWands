@@ -90,21 +90,27 @@ public class BookOfFlyingEvents implements Listener {
                     player.setAllowFlight(true);
                     player.sendMessage(ChatColor.AQUA + "Flight has been enabled. Double-tap " + ChatColor.BLUE + "'Space'" + ChatColor.AQUA + " to enable/disable flight.");
                 }
-
-                final BukkitScheduler scheduler = main.getPlugin(main.class).getServer().getScheduler();
-                scheduler.scheduleSyncRepeatingTask(main.getPlugin(main.class), new Runnable() {
+                new BukkitRunnable() {
+                    @Override
                     public void run() {
                         if (getTotalExperience(event.getPlayer()) <= 0) {
                             player.setAllowFlight(false);
                             player.sendMessage(ChatColor.RED + "Flight has been disabled. Out of experience.");
                             // cancel scheduler here
+                            cancel();
                         } else {
                             //player.setExp(player.getTotalExperience() - 15f);
                             setTotalExperience(getTotalExperience(event.getPlayer()) - 2, event.getPlayer());
                         }
                     }
-                }, 10L, 5L); // (initial delay, runs this many ticks) 10L 1L
+                }.runTaskTimer(main.getPlugin(main.class), 10L, 5L);
 
+                /*final BukkitScheduler scheduler = main.getPlugin(main.class).getServer().getScheduler();
+                scheduler.scheduleSyncRepeatingTask(main.getPlugin(main.class), new Runnable() {
+                    public void run() {
+
+                    }
+                }, 10L, 5L); // (initial delay, runs this many ticks) 10L 1L */
             }
             if (event.getAction() == Action.LEFT_CLICK_AIR) {
                 player.setAllowFlight(false);
