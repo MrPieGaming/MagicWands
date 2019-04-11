@@ -16,10 +16,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
 
 public class BookOfFlyingEvents implements Listener {
 
@@ -81,38 +80,32 @@ public class BookOfFlyingEvents implements Listener {
     }
 
     @EventHandler
-    public void onBookRightClick(final PlayerInteractEvent event) {
+    public void onBookToggle(final PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         ItemStack bof = new ItemStack(BookOfFlyingItem.bofItem());
+
         if (player.getInventory().getItemInMainHand().equals(bof)) {
-            if (event.getAction() == Action.RIGHT_CLICK_AIR) {
+            if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 if (player.getLevel() != 0) {
                     player.setAllowFlight(true);
                     player.sendMessage(ChatColor.AQUA + "Flight has been enabled. Double-tap " + ChatColor.BLUE + "'Space'" + ChatColor.AQUA + " to enable/disable flight.");
                 }
-                new BukkitRunnable() {
+                BukkitTask br = new BukkitRunnable() {
                     @Override
                     public void run() {
+
                         if (getTotalExperience(event.getPlayer()) <= 0) {
                             player.setAllowFlight(false);
                             player.sendMessage(ChatColor.RED + "Flight has been disabled. Out of experience.");
                             // cancel scheduler here
                             cancel();
                         } else {
-                            //player.setExp(player.getTotalExperience() - 15f);
                             setTotalExperience(getTotalExperience(event.getPlayer()) - 2, event.getPlayer());
                         }
                     }
                 }.runTaskTimer(main.getPlugin(main.class), 10L, 5L);
-
-                /*final BukkitScheduler scheduler = main.getPlugin(main.class).getServer().getScheduler();
-                scheduler.scheduleSyncRepeatingTask(main.getPlugin(main.class), new Runnable() {
-                    public void run() {
-
-                    }
-                }, 10L, 5L); // (initial delay, runs this many ticks) 10L 1L */
             }
-            if (event.getAction() == Action.LEFT_CLICK_AIR) {
+            if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
                 player.setAllowFlight(false);
                 player.sendMessage(ChatColor.RED + "Flight has been disabled.");
             }
@@ -156,8 +149,8 @@ public class BookOfFlyingEvents implements Listener {
             int experienceNeeded = (2 * level) + 7;
             float experience = (float) remainder / (float) experienceNeeded;
             experience = round(experience, 2);
-            System.out.println("xpForLevel: " + xpForLevel);
-            System.out.println(experience);
+            /*System.out.println("xpForLevel: " + xpForLevel);
+            System.out.println(experience); */
 
             //Set Everything
             player.setLevel(level);
@@ -175,8 +168,8 @@ public class BookOfFlyingEvents implements Listener {
             int experienceNeeded = (5 * level) - 38;
             float experience = (float) remainder / (float) experienceNeeded;
             experience = round(experience, 2);
-            System.out.println("xpForLevel: " + xpForLevel);
-            System.out.println(experience);
+            /*System.out.println("xpForLevel: " + xpForLevel);
+            System.out.println(experience);*/
 
             //Set Everything
             player.setLevel(level);
@@ -194,8 +187,8 @@ public class BookOfFlyingEvents implements Listener {
             int experienceNeeded = (9 * level) - 158;
             float experience = (float) remainder / (float) experienceNeeded;
             experience = round(experience, 2);
-            System.out.println("xpForLevel: " + xpForLevel);
-            System.out.println(experience);
+            /*System.out.println("xpForLevel: " + xpForLevel);
+            System.out.println(experience);*/
 
             //Set Everything
             player.setLevel(level);
