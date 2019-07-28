@@ -3,6 +3,7 @@ package me.pieface3450.magicwands.Events;
 import me.pieface3450.magicwands.Wands.FireballWandItem;
 import me.pieface3450.magicwands.Wands.LightningWandItem;
 import me.pieface3450.magicwands.Wands.TeleportWandItem;
+import me.pieface3450.magicwands.main;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -39,7 +40,8 @@ public class WandEvents implements Listener {
                 p.setHealth(futureHealth);
                 p.teleport(tpLocation);
                 p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 0.5F, 1.0F);
-                p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 0);
+                //p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 0);
+                p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, null);
             }
         }
     }
