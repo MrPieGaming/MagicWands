@@ -22,6 +22,12 @@ import java.math.BigDecimal;
 
 public class BookOfFlyingEvents implements Listener {
 
+    private final main plugin;
+
+    public BookOfFlyingEvents(main plugin) {
+        this.plugin = plugin;
+    }
+
     @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
         ItemStack bof = new ItemStack(BookOfFlyingItem.bofItem());
@@ -90,7 +96,26 @@ public class BookOfFlyingEvents implements Listener {
                     player.setAllowFlight(true);
                     player.sendMessage(ChatColor.AQUA + "Flight has been enabled. Double-tap " + ChatColor.BLUE + "'Space'" + ChatColor.AQUA + " to enable/disable flight.");
                 }
-                BukkitTask br = new BukkitRunnable() {
+
+                final int taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        if (getTotalExperience(event.getPlayer()) <= 0) {
+                            player.setAllowFlight(false);
+                            player.sendMessage(ChatColor.RED + "Flight has been disabled. Out of experience.");
+                            // cancel scheduler here
+                            Bukkit.getScheduler().cancelTask(taskId);
+                        } else if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+                            player.setAllowFlight(false);
+                            player.sendMessage(ChatColor.RED + "Flight has been disabled.");
+                            Bukkit.getScheduler().cancelTask(taskId);
+                        } else {
+                            setTotalExperience(getTotalExperience(event.getPlayer()) - 2, event.getPlayer());
+                        }
+                    }
+                }, 10L, 5L);
+
+                /*BukkitTask br = new BukkitRunnable() {
                     @Override
                     public void run() {
 
@@ -99,11 +124,15 @@ public class BookOfFlyingEvents implements Listener {
                             player.sendMessage(ChatColor.RED + "Flight has been disabled. Out of experience.");
                             // cancel scheduler here
                             cancel();
+                        } else if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+                            player.setAllowFlight(false);
+                            player.sendMessage(ChatColor.RED + "Flight has been disabled.");
+                            cancel();
                         } else {
                             setTotalExperience(getTotalExperience(event.getPlayer()) - 2, event.getPlayer());
                         }
                     }
-                }.runTaskTimer(main.getPlugin(main.class), 10L, 5L);
+                }.runTaskTimer(plugin, 10L, 5L); */
             }
             if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
                 player.setAllowFlight(false);

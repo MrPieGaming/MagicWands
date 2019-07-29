@@ -19,7 +19,7 @@ public class main extends JavaPlugin {
 
     private void registerEvents() {
         Bukkit.getServer().getPluginManager().registerEvents(new WandEvents(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new BookOfFlyingEvents(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new BookOfFlyingEvents(this), this);
     }
 
     private void registerRecipes() {
