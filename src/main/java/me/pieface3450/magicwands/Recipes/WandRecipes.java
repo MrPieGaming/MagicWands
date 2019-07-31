@@ -1,21 +1,24 @@
 package me.pieface3450.magicwands.Recipes;
 
+import me.pieface3450.magicwands.Main;
 import me.pieface3450.magicwands.Wands.FireballWandItem;
 import me.pieface3450.magicwands.Wands.LightningWandItem;
 import me.pieface3450.magicwands.Wands.TeleportWandItem;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 
 public class WandRecipes {
 
     public static Recipe fireballWandRecipe() {
-        ShapedRecipe fireballWandRecipe = new ShapedRecipe(FireballWandItem.fireballWandItem());
+        NamespacedKey key = new NamespacedKey(Main.getPlugin(Main.class), "fireball_wand");
+
+        ShapedRecipe fireballWandRecipe = new ShapedRecipe(key, FireballWandItem.fireballWandItem());
         fireballWandRecipe.shape(
-                "#L#",
-                "#S#",
-                "#S#");
-        fireballWandRecipe.setIngredient('#', Material.AIR);
+                " L ",
+                " S ",
+                " S ");
         fireballWandRecipe.setIngredient('L', Material.LAVA_BUCKET);
         fireballWandRecipe.setIngredient('S', Material.STICK);
 

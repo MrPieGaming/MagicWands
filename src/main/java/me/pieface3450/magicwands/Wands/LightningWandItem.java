@@ -11,9 +11,12 @@ public class LightningWandItem {
     public static ItemStack lightningWandItem() {
         ItemStack lightningWand = new ItemStack(Material.STICK, 1);
         ItemMeta lightningWandMeta = lightningWand.getItemMeta();
-        lightningWandMeta.setDisplayName(ChatColor.AQUA + "Lightning Wand");
-        lightningWandMeta.setLore(Arrays.asList(ChatColor.DARK_PURPLE + "Right-click to summon lightning where you are looking", "", ChatColor.DARK_RED + "Cost: 3 ♥", ChatColor.GREEN + "Max Range: 25 Blocks"));
-        lightningWand.setItemMeta(lightningWandMeta);
+
+        if (lightningWandMeta != null) {
+            lightningWandMeta.setDisplayName(ChatColor.AQUA + "Lightning Wand");
+            lightningWandMeta.setLore(Arrays.asList(ChatColor.DARK_PURPLE + "Right-click to summon lightning where you are looking", "", ChatColor.DARK_RED + "Cost: 3 ♥", ChatColor.GREEN + "Max Range: 25 Blocks"));
+            lightningWand.setItemMeta(lightningWandMeta);
+        }
 
         return lightningWand;
     }

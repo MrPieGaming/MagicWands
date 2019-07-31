@@ -1,6 +1,6 @@
 name: MagicWands
 version: ${project.version}
-main: me.pieface3450.magicwands.main
+main: me.pieface3450.magicwands.Main
 prefix: Magic Wands
 load: POSTWORLD
 author: MrPieGaming
