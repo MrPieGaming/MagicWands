@@ -19,6 +19,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BookOfFlyingEvents implements Listener {
 
@@ -86,34 +88,37 @@ public class BookOfFlyingEvents implements Listener {
     }
 
     @EventHandler
-    public void onBookToggle(final PlayerInteractEvent event) {
+    public void onBookToggle(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
-        ItemStack bof = new ItemStack(BookOfFlyingItem.bofItem());
+        final ItemStack bof = new ItemStack(BookOfFlyingItem.bofItem());
+        HashMap<String, Integer> taskId = new HashMap<>();
 
         if (player.getInventory().getItemInMainHand().equals(bof)) {
             if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                System.out.println("The player RIGHT CLICKED the book!");
                 if (player.getLevel() != 0) {
                     player.setAllowFlight(true);
                     player.sendMessage(ChatColor.AQUA + "Flight has been enabled. Double-tap " + ChatColor.BLUE + "'Space'" + ChatColor.AQUA + " to enable/disable flight.");
-                }
 
-                final int taskId = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        if (getTotalExperience(event.getPlayer()) <= 0) {
-                            player.setAllowFlight(false);
-                            player.sendMessage(ChatColor.RED + "Flight has been disabled. Out of experience.");
-                            // cancel scheduler here
-                            Bukkit.getScheduler().cancelTask(taskId);
-                        } else if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
-                            player.setAllowFlight(false);
-                            player.sendMessage(ChatColor.RED + "Flight has been disabled.");
-                            Bukkit.getScheduler().cancelTask(taskId);
-                        } else {
-                            setTotalExperience(getTotalExperience(event.getPlayer()) - 2, event.getPlayer());
+                    taskId.put(player.getName(), Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            if (getTotalExperience(player) <= 0 || (getTotalExperience(player) - 2) < 0) {
+                                player.setAllowFlight(false);
+                                player.sendMessage(ChatColor.RED + "Flight has been disabled. Out of experience.");
+                                // cancel scheduler here
+                                Bukkit.getServer().getScheduler().cancelTask(taskId.get(player.getName()));
+                                System.out.println(Bukkit.getServer().getScheduler().isCurrentlyRunning(taskId.get(player.getName())));
+                                System.out.println("LEFT CLICK is going through in the run() method and task should be canceled.");
+                            } else setTotalExperience(getTotalExperience(player) - 2, event.getPlayer());
+
+                            if (event.getAction().equals(Action.LEFT_CLICK_AIR))
+                                System.out.println("The player has LEFT CLICKED Air!");
                         }
-                    }
-                }, 10L, 5L);
+                    }, 10L, 5L));
+
+                    System.out.println(taskId.get(player.getName()));
+                }
 
                 /*BukkitTask br = new BukkitRunnable() {
                     @Override
@@ -134,9 +139,11 @@ public class BookOfFlyingEvents implements Listener {
                     }
                 }.runTaskTimer(plugin, 10L, 5L); */
             }
-            if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+            if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK && taskId.get(player.getName()) != null) {
                 player.setAllowFlight(false);
                 player.sendMessage(ChatColor.RED + "Flight has been disabled.");
+                Bukkit.getServer().getScheduler().cancelTask(taskId.get(player.getName())); // throwing null exception
+                System.out.println("LEFT CLICK is going through in the LEFT CLICK if statement and task should be canceled.");
             }
         }
     }
