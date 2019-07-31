@@ -28,6 +28,4 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().addRecipe(WandRecipes.fireballWandRecipe());
         Bukkit.getServer().addRecipe(BookOfFlyingRecipe.bofRecipe());
     }
-
-    // C:\Users\piefa\Desktop\MC Servers\Spigot Servers\Spigot 1.13.2\plugins
 }
