@@ -1,9 +1,7 @@
 package me.pieface3450.magicwands.Recipes;
 
+import me.pieface3450.magicwands.Items.WandItems;
 import me.pieface3450.magicwands.Main;
-import me.pieface3450.magicwands.Wands.FireballWandItem;
-import me.pieface3450.magicwands.Wands.LightningWandItem;
-import me.pieface3450.magicwands.Wands.TeleportWandItem;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.Recipe;
@@ -14,11 +12,12 @@ public class WandRecipes {
     public static Recipe fireballWandRecipe() {
         NamespacedKey key = new NamespacedKey(Main.getPlugin(Main.class), "fireball_wand");
 
-        ShapedRecipe fireballWandRecipe = new ShapedRecipe(key, FireballWandItem.fireballWandItem());
+        ShapedRecipe fireballWandRecipe = new ShapedRecipe(key, WandItems.fireballWandItem());
         fireballWandRecipe.shape(
-                " L ",
-                " S ",
-                " S ");
+                "L",
+                "S",
+                "S");
+
         fireballWandRecipe.setIngredient('L', Material.LAVA_BUCKET);
         fireballWandRecipe.setIngredient('S', Material.STICK);
 
@@ -26,11 +25,13 @@ public class WandRecipes {
     }
 
     public static Recipe tpWandRecipe() {
-        ShapedRecipe tpWandRecipe = new ShapedRecipe(TeleportWandItem.teleportWandItem());
-        tpWandRecipe.shape("#E#",
-                "#S#",
-                "#S#");
-        tpWandRecipe.setIngredient('#', Material.AIR);
+        NamespacedKey key = new NamespacedKey(Main.getPlugin(Main.class), "teleport_wand");
+
+        ShapedRecipe tpWandRecipe = new ShapedRecipe(key, WandItems.teleportWandItem());
+        tpWandRecipe.shape(
+                "E",
+                "S",
+                "S");
         tpWandRecipe.setIngredient('E', Material.ENDER_PEARL);
         tpWandRecipe.setIngredient('S', Material.STICK);
 
@@ -38,11 +39,13 @@ public class WandRecipes {
     }
 
     public static Recipe lightningWandRecipe() {
-        ShapedRecipe lightningWandRecipe = new ShapedRecipe(LightningWandItem.lightningWandItem());
-        lightningWandRecipe.shape("#N#",
-                "#S#",
-                "#S#");
-        lightningWandRecipe.setIngredient('#', Material.AIR);
+        NamespacedKey key = new NamespacedKey(Main.getPlugin(Main.class), "lightning_wand");
+
+        ShapedRecipe lightningWandRecipe = new ShapedRecipe(key, WandItems.lightningWandItem());
+        lightningWandRecipe.shape(
+                "N",
+                "S",
+                "S");
         lightningWandRecipe.setIngredient('N', Material.NETHER_STAR);
         lightningWandRecipe.setIngredient('S', Material.STICK);
 

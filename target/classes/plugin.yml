@@ -1,5 +1,5 @@
 name: MagicWands
-version: ${project.version}
+version: 2.2.5
 main: me.pieface3450.magicwands.Main
 prefix: Magic Wands
 load: POSTWORLD

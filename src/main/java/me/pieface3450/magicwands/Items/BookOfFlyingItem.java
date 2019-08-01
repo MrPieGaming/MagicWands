@@ -14,7 +14,8 @@ public class BookOfFlyingItem {
 
         if (bofMeta != null) {
             bofMeta.setDisplayName(ChatColor.AQUA + "Book of Flying");
-            bofMeta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click" + ChatColor.DARK_PURPLE + " to enable flight", ChatColor.RED + "Left-click" + ChatColor.DARK_PURPLE + " to disable flight."));
+            bofMeta.setLore(Arrays.asList(ChatColor.AQUA + "Right-click" + ChatColor.DARK_PURPLE + " to enable flight", ChatColor.RED + "Left-click" + ChatColor.DARK_PURPLE + " to disable flight",
+                    "", ChatColor.LIGHT_PURPLE + "XP will be drained while this book is active"));
             bof.setItemMeta(bofMeta);
         }
 
