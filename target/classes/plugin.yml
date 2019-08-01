@@ -1,0 +1,8 @@
+name: MagicWands
+version: 2.2
+main: me.pieface3450.magicwands.Main
+prefix: Magic Wands
+load: POSTWORLD
+author: MrPieGaming
+description: A plugin that adds Magical items to the game.
+api-version: 1.14

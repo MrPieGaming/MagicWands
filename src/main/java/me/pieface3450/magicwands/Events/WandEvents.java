@@ -1,8 +1,6 @@
 package me.pieface3450.magicwands.Events;
 
-import me.pieface3450.magicwands.Wands.FireballWandItem;
-import me.pieface3450.magicwands.Wands.LightningWandItem;
-import me.pieface3450.magicwands.Wands.TeleportWandItem;
+import me.pieface3450.magicwands.Items.WandItems;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,7 +22,7 @@ public class WandEvents implements Listener {
     @EventHandler
     public void onTeleportClick(PlayerInteractEvent event) {
         Player p = event.getPlayer();
-        ItemStack wand = new ItemStack(TeleportWandItem.teleportWandItem());
+        ItemStack wand = new ItemStack(WandItems.teleportWandItem());
         if ((event.getAction() == Action.RIGHT_CLICK_AIR) &&
                 (p.getInventory().getItemInMainHand().equals(wand))) {
             Location tpLocation = staredAtBlock(p).getLocation().add(0.0D, 1.0D, 0.0D);
@@ -48,7 +46,7 @@ public class WandEvents implements Listener {
     @EventHandler
     public void onFireballClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        ItemStack wand = new ItemStack(FireballWandItem.fireballWandItem());
+        ItemStack wand = new ItemStack(WandItems.fireballWandItem());
         if ((event.getAction() == Action.RIGHT_CLICK_AIR) &&
                 (player.getInventory().getItemInMainHand().equals(wand))) {
             double currentHealth = player.getHealth();
@@ -67,7 +65,7 @@ public class WandEvents implements Listener {
     @EventHandler
     public void onLightningClick(PlayerInteractEvent event) {
         Player p = event.getPlayer();
-        ItemStack wand = new ItemStack(LightningWandItem.lightningWandItem());
+        ItemStack wand = new ItemStack(WandItems.lightningWandItem());
         if ((event.getAction() == Action.RIGHT_CLICK_AIR) &&
                 (p.getInventory().getItemInMainHand().equals(wand))) {
             Location lightningLocation = staredAtBlock(p).getLocation().add(0.0D, 1.0D, 0.0D);
