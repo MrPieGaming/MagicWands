@@ -14,9 +14,9 @@ public class WandRecipes {
 
         ShapedRecipe fireballWandRecipe = new ShapedRecipe(key, WandItems.fireballWandItem());
         fireballWandRecipe.shape(
-                " L ",
-                " S ",
-                " S ");
+                "L",
+                "S",
+                "S");
 
         fireballWandRecipe.setIngredient('L', Material.LAVA_BUCKET);
         fireballWandRecipe.setIngredient('S', Material.STICK);
@@ -25,11 +25,13 @@ public class WandRecipes {
     }
 
     public static Recipe tpWandRecipe() {
-        ShapedRecipe tpWandRecipe = new ShapedRecipe(WandItems.teleportWandItem());
-        tpWandRecipe.shape("#E#",
-                "#S#",
-                "#S#");
-        tpWandRecipe.setIngredient('#', Material.AIR);
+        NamespacedKey key = new NamespacedKey(Main.getPlugin(Main.class), "teleport_wand");
+
+        ShapedRecipe tpWandRecipe = new ShapedRecipe(key, WandItems.teleportWandItem());
+        tpWandRecipe.shape(
+                "E",
+                "S",
+                "S");
         tpWandRecipe.setIngredient('E', Material.ENDER_PEARL);
         tpWandRecipe.setIngredient('S', Material.STICK);
 
@@ -37,11 +39,13 @@ public class WandRecipes {
     }
 
     public static Recipe lightningWandRecipe() {
-        ShapedRecipe lightningWandRecipe = new ShapedRecipe(WandItems.lightningWandItem());
-        lightningWandRecipe.shape("#N#",
-                "#S#",
-                "#S#");
-        lightningWandRecipe.setIngredient('#', Material.AIR);
+        NamespacedKey key = new NamespacedKey(Main.getPlugin(Main.class), "lightning_wand");
+
+        ShapedRecipe lightningWandRecipe = new ShapedRecipe(key, WandItems.lightningWandItem());
+        lightningWandRecipe.shape(
+                "N",
+                "S",
+                "S");
         lightningWandRecipe.setIngredient('N', Material.NETHER_STAR);
         lightningWandRecipe.setIngredient('S', Material.STICK);
 

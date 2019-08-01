@@ -19,6 +19,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 
 public class BookOfFlyingEvents implements Listener {
@@ -223,7 +224,7 @@ public class BookOfFlyingEvents implements Listener {
 
     private float round(float d, int decimalPlace) {
         BigDecimal bd = new BigDecimal(Float.toString(d));
-        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_DOWN);
+        bd = bd.setScale(decimalPlace, RoundingMode.HALF_DOWN);
         return bd.floatValue();
     }
 }
