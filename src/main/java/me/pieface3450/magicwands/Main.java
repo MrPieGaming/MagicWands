@@ -5,7 +5,7 @@ import me.pieface3450.magicwands.Recipes.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin { // comment with IntelliJ Ultimate Edition
 
     public void onEnable() {
         getLogger().info("Magic Wands v" + getDescription().getVersion() + " enabled");
