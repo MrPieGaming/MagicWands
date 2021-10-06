@@ -20,6 +20,7 @@ main
 
 # IntelliJ files
 .idea/
+target/
 
 # Output files
 *.log
